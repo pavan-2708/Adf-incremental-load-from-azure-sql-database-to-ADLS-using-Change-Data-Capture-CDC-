@@ -1,0 +1,17 @@
+{
+	"name": "ds_sql_db_src",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sql_db_src",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "cdc",
+			"table": "dbo_customers_CT"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
