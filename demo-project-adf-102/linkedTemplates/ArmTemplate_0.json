@@ -30,6 +30,14 @@
 		"ls_sql_db_src_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "pavan"
+		},
+		"trigger1_properties_pipeline_parameters_triggerStartTime": {
+			"type": "string",
+			"defaultValue": "@formatDateTime(trigger().outputs.windowStartTime,'yyyy-MM-dd HH:mm:ss.fff')"
+		},
+		"trigger1_properties_pipeline_parameters_triggerEndTime": {
+			"type": "string",
+			"defaultValue": "@formatDateTime(trigger().outputs.windowEndTime,'yyyy-MM-dd HH:mm:ss.fff')"
 		}
 	},
 	"variables": {
@@ -448,6 +456,40 @@
 				"[concat(variables('factoryId'), '/datasets/ds_sql_db_src')]",
 				"[concat(variables('factoryId'), '/datasets/ls_sql_db_customer')]",
 				"[concat(variables('factoryId'), '/datasets/ls_adls_sink')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/trigger1')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipeline": {
+					"pipelineReference": {
+						"referenceName": "DELTA-PL",
+						"type": "PipelineReference"
+					},
+					"parameters": {
+						"triggerStartTime": "[parameters('trigger1_properties_pipeline_parameters_triggerStartTime')]",
+						"triggerEndTime": "[parameters('trigger1_properties_pipeline_parameters_triggerEndTime')]"
+					}
+				},
+				"type": "TumblingWindowTrigger",
+				"typeProperties": {
+					"frequency": "Minute",
+					"interval": 5,
+					"startTime": "2026-03-07T22:50:00Z",
+					"delay": "00:00:00",
+					"maxConcurrency": 50,
+					"retryPolicy": {
+						"intervalInSeconds": 30
+					},
+					"dependsOn": []
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/DELTA-PL')]"
 			]
 		}
 	]

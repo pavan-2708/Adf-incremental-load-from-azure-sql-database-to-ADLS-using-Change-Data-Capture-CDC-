@@ -31,6 +31,14 @@
 			"type": "string",
 			"defaultValue": "pavan"
 		},
+		"trigger1_properties_pipeline_parameters_triggerStartTime": {
+			"type": "string",
+			"defaultValue": "@formatDateTime(trigger().outputs.windowStartTime,'yyyy-MM-dd HH:mm:ss.fff')"
+		},
+		"trigger1_properties_pipeline_parameters_triggerEndTime": {
+			"type": "string",
+			"defaultValue": "@formatDateTime(trigger().outputs.windowEndTime,'yyyy-MM-dd HH:mm:ss.fff')"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -75,6 +83,12 @@
 					},
 					"ls_sql_db_src_properties_typeProperties_userName": {
 						"value": "[parameters('ls_sql_db_src_properties_typeProperties_userName')]"
+					},
+					"trigger1_properties_pipeline_parameters_triggerStartTime": {
+						"value": "[parameters('trigger1_properties_pipeline_parameters_triggerStartTime')]"
+					},
+					"trigger1_properties_pipeline_parameters_triggerEndTime": {
+						"value": "[parameters('trigger1_properties_pipeline_parameters_triggerEndTime')]"
 					}
 				}
 			},

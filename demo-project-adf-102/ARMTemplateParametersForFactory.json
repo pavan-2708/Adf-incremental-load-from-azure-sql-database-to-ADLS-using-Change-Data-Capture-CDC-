@@ -22,6 +22,12 @@
 		},
 		"ls_sql_db_src_properties_typeProperties_userName": {
 			"value": "pavan"
+		},
+		"trigger1_properties_pipeline_parameters_triggerStartTime": {
+			"value": "@formatDateTime(trigger().outputs.windowStartTime,'yyyy-MM-dd HH:mm:ss.fff')"
+		},
+		"trigger1_properties_pipeline_parameters_triggerEndTime": {
+			"value": "@formatDateTime(trigger().outputs.windowEndTime,'yyyy-MM-dd HH:mm:ss.fff')"
 		}
 	}
 }
